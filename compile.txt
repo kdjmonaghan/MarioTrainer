@@ -1,0 +1,4 @@
+mips64-gcc -c -I %N64ROOT%/include mario.c -o mario.c.o
+mips64-g++ -T %N64ROOT%/ldscripts/gl-n64.ld -nostdlib -Wl,--defsym,start=0x80400000 mario.c.o -o mario.elf
+mips64-objcopy mario.elf mario.elf.bin -O binary
+luapatch patch-data.lua -text hook.gsc -bin 80400000 mario.elf.bin
